@@ -1,0 +1,21 @@
+<style>
+  th-app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  th-app > main {
+    display: flex;
+    flex: 1;
+  }
+</style>
+
+<template id="th-app">
+  <th-taskbar></th-taskbar>
+  <main>
+    <th-nav></th-nav>
+    <th-page></th-page>
+    <th-aside></th-aside>
+  </main>
+</template>

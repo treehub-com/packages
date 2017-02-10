@@ -1,0 +1,15 @@
+{
+  "name": "@thp/app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babili-webpack-plugin": "0.0.10",
+    "raw-loader": "0.5.1",
+    "th-app": "*",
+    "webpack": "2.2.1"
+  }
+}

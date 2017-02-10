@@ -1,0 +1,95 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+
+const name = process.argv[2];
+
+if (!name) {
+  console.log('name is required');
+  process.exit();
+}
+
+const dir = path.join(process.cwd(), 'packages', name);
+
+try {
+  fs.statSync(dir);
+  console.log('package already exists');
+  process.exit();
+} catch (error) {
+  console.log(`creating package ${name}`);
+}
+
+fs.mkdirSync(dir);
+
+fs.writeFileSync(path.join(dir, '.gitignore'),
+`components.js
+`);
+
+fs.writeFileSync(path.join(dir, 'package.json'),
+`{
+  "name": "@thp/${name}",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babili-webpack-plugin": "0.0.10",
+    "raw-loader": "0.5.1",
+    "webpack": "2.2.1"
+  }
+}
+`);
+
+fs.writeFileSync(path.join(dir, 'webpack.config.js'),
+`const BabiliPlugin = require('babili-webpack-plugin');
+
+const config = {
+  entry: {
+    components: '',
+  },
+  output: {
+    filename: '[name].js',
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.html$/,
+        loader: 'raw-loader',
+      },
+    ],
+  },
+  plugins: [],
+};
+
+if (process.env.ENV === 'production') {
+  appConfig.plugins.push(new BabiliPlugin({
+    comments: false,
+  }));
+}
+
+module.exports = config;
+`);
+
+fs.writeFileSync(path.join(dir, 'treehub.json'),
+`{
+  "name": "${name}",
+  "version": "0.0.0",
+  "description": "",
+  "components": [
+    "components.js"
+  ],
+  "taskbar": [],
+  "nav": [],
+  "page": "",
+  "aside": "",
+  "route": ""
+}
+`);
+
+fs.writeFileSync(path.join(dir, 'README.md'),
+`# ${name}
+`);
+
+console.log('complete');
