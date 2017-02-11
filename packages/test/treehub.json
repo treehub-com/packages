@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "0.0.0",
+  "description": "",
+  "components": [
+    "components.js"
+  ],
+  "taskbar": ["test-taskbar"],
+  "nav": ["test-nav"],
+  "page": "test-page",
+  "aside": "test-aside",
+  "route": "route.js"
+}

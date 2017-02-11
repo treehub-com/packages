@@ -1,0 +1,18 @@
+{
+  "name": "@thp/test",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babili-webpack-plugin": "0.0.10",
+    "raw-loader": "0.5.1",
+    "test-aside": "*",
+    "test-nav": "*",
+    "test-page": "*",
+    "test-taskbar": "*",
+    "webpack": "2.2.1"
+  }
+}
