@@ -25,7 +25,7 @@ class Component extends core(HTMLElement) {
     if (path.length === 0) {
       return this.innerHTML = '';
     }
-    const pkg = TH[path.shift().toLowerCase()];
+    const pkg = window.packages[path.shift().toLowerCase()];
     if (pkg == undefined) {
       return this.innerText = 'Package not installed';
     }

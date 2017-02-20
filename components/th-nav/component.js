@@ -8,9 +8,9 @@ class Component extends core(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    for (const pkg of Object.keys(TH)) {
-      if (Array.isArray(TH[pkg].nav)) {
-        for (const elem of TH[pkg].nav) {
+    for (const pkg of Object.keys(window.packages)) {
+      if (Array.isArray(window.packages[pkg].nav)) {
+        for (const elem of window.packages[pkg].nav) {
           this.insertAdjacentHTML('beforeend', `<${elem}></${elem}>`);
         }
       }

@@ -20,7 +20,7 @@ class Component extends core(HTMLElement) {
       // TODO handle index page?
       return this.innerHTML = '';
     }
-    const pkg = TH[path.shift().toLowerCase()];
+    const pkg = window.packages[path.shift().toLowerCase()];
     if (pkg == undefined) {
       return this.innerText = 'Package not installed';
     }
