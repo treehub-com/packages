@@ -65,7 +65,7 @@ class Component extends core(HTMLElement) {
 
       if (currentPath === newPath && currentHash === newHash) return;
 
-      history.pushState({}, '', newPath + (newHash) ? `${newHash}` : '');
+      history.pushState({}, '', newPath + ((newHash) ? `${newHash}` : ''));
       this.$.page.setAttribute('path', newPath);
       this.$.aside.setAttribute('path', newPath);
       this.$.aside.setAttribute('hash', newHash);
