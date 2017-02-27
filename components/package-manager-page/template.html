@@ -1,9 +1,22 @@
 <style>
   package-manager-page {
     display: flex;
+    flex-direction: column;
+  }
+
+  package-manager-page thead {
+    font-weight: bold;
   }
 </style>
 
 <template id="package-manager-page">
-  package-manager-page
+  <h1>Installed Packages</h1>
+  <table>
+    <thead>
+      <td>Package</td>
+      <td>Version</td>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 </template>
