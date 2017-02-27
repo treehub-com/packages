@@ -15,10 +15,33 @@ class Component extends core(HTMLElement) {
     });
 
     window.onpopstate = window.onhashchange = () => {
-      this.$.page.setAttribute('path', window.location.pathname);
-      this.$.aside.setAttribute('path', window.location.pathname);
-      this.$.aside.setAttribute('hash', window.location.hash);
+      this._navigate(window.location.pathname,
+        this._stripHash(window.location.hash));
     };
+
+    Object.defineProperties(window, {
+        'aside': {
+          get: () => {
+            const hash = window.location.hash;
+            if (hash.length > 0 && hash[0] === '#') {
+              return hash.slice(1);
+            }
+            return hash;
+          },
+          set: (aside) => {
+            this._navigate(window.location.pathname, aside);
+          },
+        },
+        'page': {
+          get: () => {
+            return window.location.pathname;
+          },
+          set: (location) => {
+            const url = new URL(location, window.location);
+            this._navigate(url.pathname, this._stripHash(url.hash));
+          },
+        },
+    });
 
     this.addEventListener('click', (e) => {
       // Adapted from https://github.com/visionmedia/page.js/blob/master/page.js
@@ -58,25 +81,35 @@ class Component extends core(HTMLElement) {
 
       // We have a valid link at this point
 
-      const currentPath = window.location.pathname;
-      const newPath = el.pathname;
-      const currentHash = window.location.hash;
-      const newHash = el.hash;
-
-      if (currentPath === newPath && currentHash === newHash) return;
-
-      history.pushState({}, '', newPath + ((newHash) ? `${newHash}` : ''));
-      this.$.page.setAttribute('path', newPath);
-      this.$.aside.setAttribute('path', newPath);
-      this.$.aside.setAttribute('hash', newHash);
+      this._navigate(el.pathname, this._stripHash(el.hash));
     });
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.$.page.setAttribute('path', window.location.pathname);
-    this.$.aside.setAttribute('path', window.location.pathname);
-    this.$.aside.setAttribute('hash', window.location.hash);
+    // We don't call _navigate to avoid the new/old comparison
+    this.$.page.setAttribute('page', window.location.pathname);
+    this.$.aside.setAttribute('page', window.location.pathname);
+    this.$.aside.setAttribute('aside', this._stripHash(window.location.hash));
+  }
+
+  _navigate(page, aside) {
+    const currentPage = window.location.pathname;
+    const currentAside = window.location.hash;
+
+    if (currentPage === page && currentAside === aside) return;
+
+    history.pushState({}, '', page + ((aside) ? `#${aside}` : ''));
+    this.$.page.setAttribute('page', page);
+    this.$.aside.setAttribute('page', page);
+    this.$.aside.setAttribute('aside', aside);
+  }
+
+  _stripHash(str) {
+    if (str.length > 0 && str[0] === '#') {
+      return str.slice(1);
+    }
+    return str;
   }
 }
 

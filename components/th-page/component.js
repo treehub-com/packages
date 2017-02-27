@@ -9,13 +9,13 @@ class Component extends core(HTMLElement) {
 
   static get observedAttributes() {
     return [
-      'path',
+      'page',
     ];
   }
 
-  _pathChanged(newPath, oldPath) {
+  _pageChanged(newPage, oldPage) {
     // TODO don't recreate when package is the same
-    const path = decodeURI(newPath).split('/').filter((s)=>s !== '');
+    const path = decodeURI(newPage).split('/').filter((s)=>s !== '');
     if (path.length === 0) {
       // TODO handle index page?
       return this.innerHTML = '';

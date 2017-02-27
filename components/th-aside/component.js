@@ -9,18 +9,14 @@ class Component extends core(HTMLElement) {
 
   static get observedAttributes() {
     return [
-      'hash',
-      'path',
+      'aside',
+      'page',
     ];
   }
 
-  _hashChanged(newHash, oldHash) {
-    // Remove # if present
-    if (newHash.length > 0 && newHash[0] === '#') {
-      newHash = newHash.slice(1);
-    }
+  _asideChanged(newAside, oldAside) {
     // TODO don't recreate when package is the same
-    const path = decodeURI(newHash).split('/').filter((s)=>s !== '');
+    const path = decodeURI(newAside).split('/').filter((s)=>s !== '');
 
     if (path.length === 0) {
       return this.innerHTML = '';
