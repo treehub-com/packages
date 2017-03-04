@@ -1,0 +1,17 @@
+{
+  "name": "@thp/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
+  "dependencies": {
+    "treehub-spaces": "0.0.0"
+  },
+  "devDependencies": {
+    "babili-webpack-plugin": "0.0.10",
+    "raw-loader": "0.5.1",
+    "webpack": "2.2.1"
+  }
+}
