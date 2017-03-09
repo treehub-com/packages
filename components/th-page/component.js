@@ -1,6 +1,7 @@
 const core = require('th-core');
+const graphql = require('th-graphql');
 
-class Component extends core(HTMLElement) {
+class Component extends core(graphql(HTMLElement)) {
   constructor() {
     super({
       attributes: Component.observedAttributes,
@@ -17,8 +18,7 @@ class Component extends core(HTMLElement) {
     // TODO don't recreate when package is the same
     const path = decodeURI(newPage).split('/').filter((s)=>s !== '');
     if (path.length === 0) {
-      // TODO handle index page?
-      return this.innerHTML = '';
+      return this._indexPage();
     }
     const pkg = window.packages[path.shift().toLowerCase()];
     if (pkg == undefined) {
@@ -29,6 +29,61 @@ class Component extends core(HTMLElement) {
       return this.innerText = 'Package has no page';
     }
     this.innerHTML = `<${pkg.page} path="/${path.join('/')}"></${pkg.page}>`;
+  }
+
+  async _indexPage() {
+    // Ensure _ space exists
+    const space = await this._query({
+      url: '/api/',
+      query: 'space(id: $input) { id }',
+      type: 'String',
+      input: '_',
+    });
+
+    if (space === null) {
+      await this._mutation({
+        url: '/api/',
+        query: 'createSpace(input: $input) {id}',
+        type: 'SpaceCreateInput',
+        input: {id: '_'},
+      });
+    }
+
+    // Ensure personal tree exists
+    let tree = await this._query({
+      url: '/api/_',
+      query: 'tree(id: $input) { id name root {id type} }',
+      type: 'String',
+      input: 'personal',
+    });
+
+    if (tree === null) {
+      await this._mutation({
+        url: '/api/_',
+        query: 'createTree(input: $input) { id }',
+        type: 'TreeCreateInput',
+        input: {id: 'personal', name: 'personal'},
+      });
+      const {id} = await this._mutation({
+        url: '/api/_/personal',
+        query: 'createPerson(input: $input) { id }',
+        type: 'PersonCreateInput',
+        input: {name: 'Me'},
+      });
+      await this._mutation({
+        url: '/api/_',
+        query: 'updateTree(input: $input) { id }',
+        type: 'TreeUpdateInput',
+        input: {id: 'personal', name: 'personal', root: {id, type: 'Person'}},
+      });
+      tree = await this._query({
+        url: '/api/_',
+        query: 'tree(id: $input) { id name root {id type} }',
+        type: 'String',
+        input: 'personal',
+      });
+    }
+    console.log(tree);
   }
 }
 
