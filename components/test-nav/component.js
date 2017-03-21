@@ -5,6 +5,9 @@ class Component extends core(HTMLElement) {
     super({
       template: 'test-nav',
     });
+    this.addEventListener('click', () => {
+      window.page = '/test/#/test/';
+    });
   }
 }
 
