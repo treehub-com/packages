@@ -4,12 +4,14 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "bundle": "treehub bundle ."
   },
   "devDependencies": {
     "babili-webpack-plugin": "0.0.10",
     "raw-loader": "0.5.1",
     "th-app": "*",
+    "treehub-cli": "0.1.0",
     "webpack": "2.2.1"
   }
 }
