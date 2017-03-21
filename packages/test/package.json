@@ -13,6 +13,7 @@
     "test-nav": "*",
     "test-page": "*",
     "test-taskbar": "*",
+    "treehub-cli": "0.1.0",
     "webpack": "2.2.1"
   }
 }
