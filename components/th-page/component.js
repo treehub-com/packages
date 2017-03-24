@@ -71,6 +71,16 @@ class Component extends core(graphql(HTMLElement)) {
         input: {name: 'Me'},
       });
       await this._mutation({
+        url: '/api/_/personal',
+        query: 'commit(input: $input) { id }',
+        type: 'CommitInput',
+        input: {
+          author: 'TreeBot',
+          email: 'treebot@treehub.com',
+          message: 'Initial person',
+        },
+      });
+      await this._mutation({
         url: '/api/_',
         query: 'updateTree(input: $input) { id }',
         type: 'TreeUpdateInput',
