@@ -1,6 +1,5 @@
 {
   "name": "package-manager",
-  "version": "0.0.0",
   "description": "Treehub Package Manager",
   "components": [
     "components.js"
