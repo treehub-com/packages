@@ -1,0 +1,14 @@
+{
+  "name": "@thp/theme",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "rollup -c ../../.rollup.component.config.js",
+    "bundle": "treehub bundle ."
+  },
+  "devDependencies": {
+    "@treehub/cli": "0.3.0",
+    "rollup": "0.41.6"
+  }
+}
