@@ -1,18 +1,10 @@
-require('th-aside');
-require('th-nav');
-require('th-page');
-require('th-taskbar');
-const core = require('th-core');
+import html from './app-app.html';
 
-class Component extends core(HTMLElement) {
+class Component extends HTMLElement {
   constructor() {
-    super({
-      template: 'th-app',
-      $: {
-        aside: 'th-aside',
-        page: 'th-page',
-      },
-    });
+    super();
+
+    this.$ = {};
 
     window.onpopstate = window.onhashchange = () => {
       this._navigate(window.location.pathname,
@@ -86,7 +78,11 @@ class Component extends core(HTMLElement) {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    this.innerHTML = html;
+
+    this.$.page = this.querySelector('app-page');
+    this.$.aside = this.querySelector('app-aside');
+
     // We don't call _navigate to avoid the new/old comparison
     this.$.page.setAttribute('page', window.location.pathname);
     this.$.aside.setAttribute('page', window.location.pathname);
@@ -113,7 +109,4 @@ class Component extends core(HTMLElement) {
   }
 }
 
-const template = require('./template.html');
-document.head.insertAdjacentHTML('beforeend', template);
-
-window.customElements.define('th-app', Component);
+export default Component;
