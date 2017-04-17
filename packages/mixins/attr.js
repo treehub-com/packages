@@ -1,4 +1,4 @@
-const Mixin = (superclass) => class extends superclass {
+const Mixin = (superclass) => class Attr extends superclass {
   constructor(args) {
     superclass.name === 'HTMLElement' ? super() : super(args);
 
