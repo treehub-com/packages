@@ -1,12 +1,10 @@
 module.exports = {
   parserOptions: {
     ecmaVersion: 2017,
+    sourceType: 'module'
   },
   extends: 'google',
   rules: {
     'require-jsdoc': 0,
-  },
-  parserOptions: {
-    sourceType: 'module'
   }
 }

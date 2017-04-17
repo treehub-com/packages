@@ -1,7 +1,7 @@
-const core = require('th-core');
-const graphql = require('th-graphql');
+import attr from '@thp/mixins/attr';
+import graphql from '@thp/mixins/graphql';
 
-class Component extends core(graphql(HTMLElement)) {
+class Component extends graphql(attr(HTMLElement)) {
   constructor() {
     super({
       attributes: Component.observedAttributes,
@@ -14,6 +14,11 @@ class Component extends core(graphql(HTMLElement)) {
     ];
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this._pageChanged(this.page, null);
+  }
+
   _pageChanged(newPage, oldPage) {
     // TODO don't recreate when package is the same
     const path = decodeURI(newPage).split('/').filter((s)=>s !== '');
@@ -21,11 +26,11 @@ class Component extends core(graphql(HTMLElement)) {
       return this._indexPage();
     }
     const pkg = window.packages[path.shift().toLowerCase()];
-    if (pkg == undefined) {
+    if (pkg === undefined) {
       return this.innerText = 'Package not installed';
     }
 
-    if (pkg.page == undefined) {
+    if (pkg.page === undefined) {
       return this.innerText = 'Package has no page';
     }
     this.innerHTML = `<${pkg.page} path="/${path.join('/')}"></${pkg.page}>`;
@@ -97,7 +102,4 @@ class Component extends core(graphql(HTMLElement)) {
   }
 }
 
-const template = require('./template.html');
-document.head.insertAdjacentHTML('beforeend', template);
-
-window.customElements.define('th-page', Component);
+export default Component;

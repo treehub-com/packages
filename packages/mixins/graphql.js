@@ -1,4 +1,4 @@
-module.exports = (superclass) => class extends superclass {
+const Mixin = (superclass) => class extends superclass {
   constructor(args) {
     superclass.name === 'HTMLElement' ? super() : super(args);
   }
@@ -58,3 +58,5 @@ module.exports = (superclass) => class extends superclass {
     });
   }
 };
+
+export default Mixin;
