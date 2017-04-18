@@ -11,12 +11,19 @@ class Component extends ref(HTMLElement) {
         input: '#package-manager-input',
         message: 'package-manager-message',
         tbody: '#package-manager-list tbody',
+        updated: 'package-manager-updated',
       },
     });
   }
 
   connectedCallback() {
     super.connectedCallback();
+
+    // If the taskbar updated, show the update message
+    const taskbar = document.querySelector('package-manager-taskbar');
+    if (taskbar && taskbar.getAttribute('updated')) {
+      this.$.updated.removeAttribute('hidden');
+    }
 
     // Populate the table
     const keys = Object.keys(window.packages);
