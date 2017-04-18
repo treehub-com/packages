@@ -10,4 +10,27 @@
   --color-gray-light: #DDDDDD;
   --color-off-white: #F8F8F8;
   --color-white: #FFFFFF;
+
+  --shadow-1: 0 2px 4px 0 rgba(55,55,55,0.67);
+  --shadow-2: 0 4px 10px 0 rgba(55,55,55,0.67);
+}
+h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  line-height: 1;
+}
+h2 {
+  font-size: 3rem;
+  font-weight: normal;
+  line-height: 1;
+}
+h3 {
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: 1;
+}
+h4 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  line-height: 1;
 }
