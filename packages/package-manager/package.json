@@ -4,13 +4,11 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "webpack"
+    "build": "rollup -c ../../.rollup.component.config.js",
+    "watch": "npm run build -- -w"
   },
   "devDependencies": {
-    "babili-webpack-plugin": "0.0.10",
-    "package-manager-page": "*",
-    "package-manager-taskbar": "*",
-    "raw-loader": "0.5.1",
-    "webpack": "2.2.1"
+    "@treehub/cli": "0.3.0",
+    "rollup": "0.41.6"
   }
 }

@@ -1,0 +1,29 @@
+package-manager-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+package-manager-card {
+  width: calc(100% - 4rem);
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-1);
+}
+
+#package-manager-list {
+  margin-bottom: 1rem;
+}
+
+#package-manager-list thead {
+  font-size: 1.25rem;
+}
+#package-manager-list td {
+  padding: .5rem 0 .5rem 1rem;
+}
+
+#package-manager-input {
+  margin-right: 1rem;
+}

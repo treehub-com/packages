@@ -34,3 +34,28 @@ h4 {
   font-weight: normal;
   line-height: 1;
 }
+input {
+  padding: .5rem 1rem;
+  border: 1px solid rgba(55,55,55,0.13);
+  border-radius: .25rem;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
+}
+button {
+  padding: .5rem 1rem;
+  color: var(--color-white);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
+  background-color: var(--color-blue);
+  border: 0;
+  border-radius: .25rem;
+  cursor: pointer;
+}
+button[type="submit"] {
+  background-color: var(--color-green);
+}
+button[disabled] {
+  background-color: var(--color-gray-light);
+}
