@@ -1,14 +1,17 @@
-const core = require('th-core');
+import html from './package-manager-page.html';
+import ref from '@thp/mixins/ref';
 
-class Component extends core(HTMLElement) {
+class Component extends ref(HTMLElement) {
   constructor() {
     super({
-      template: 'package-manager-page',
+      html,
       $: {
-        tbody: 'tbody',
-        input: 'input',
-        button: 'button',
-        message: '#package-manager-page-message',
+        button: '#package-manager-form button',
+        form: '#package-manager-form',
+        input: '#package-manager-input',
+        message: 'package-manager-message',
+        tbody: '#package-manager-list tbody',
+        updated: 'package-manager-updated',
       },
     });
   }
@@ -16,20 +19,41 @@ class Component extends core(HTMLElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    this.$.button.addEventListener('click', () => this._install());
+    // If the taskbar updated, show the update message
+    const taskbar = document.querySelector('package-manager-taskbar');
+    if (taskbar && taskbar.getAttribute('updated')) {
+      this.$.updated.removeAttribute('hidden');
+    }
 
+    // Populate the table
     const keys = Object.keys(window.packages);
     keys.sort();
     for (const key of keys) {
       const pkg = window.packages[key];
       const row = this.$.tbody.insertRow();
+      let version = pkg.version;
+      if (!version) {
+        version = '(linked)';
+      }
       row.insertCell().insertAdjacentText('beforeend', pkg.name);
-      row.insertCell().insertAdjacentText('beforeend', pkg.version);
+      row.insertCell().insertAdjacentText('beforeend', version);
     }
+
+    // Bind to form submit
+    this.$.form.addEventListener('submit', () => this._install());
   }
 
   _install() {
-    const pkg = this.$.input.value;
+    const pkg = this.$.input.value.toLowerCase();
+    if (!pkg) {
+      return;
+    }
+
+    if (window.packages[pkg] !== undefined) {
+      this.$.message.innerText = `Package already installed`;
+      return;
+    }
+
     this.$.message.innerText = '';
     this.$.button.setAttribute('disabled', 'disabled');
     fetch('/_/package/install', {
@@ -59,7 +83,4 @@ class Component extends core(HTMLElement) {
   }
 }
 
-const template = require('./template.html');
-document.head.insertAdjacentHTML('beforeend', template);
-
-window.customElements.define('package-manager-page', Component);
+export default Component;

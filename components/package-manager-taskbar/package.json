@@ -1,9 +1,0 @@
-{
-  "name": "package-manager-taskbar",
-  "version": "0.0.0",
-  "private": true,
-  "main": "component.js",
-  "dependencies": {
-    "th-core": "*"
-  }
-}
