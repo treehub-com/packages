@@ -15,7 +15,7 @@ const Mixin = (superclass) => class Ref extends superclass {
     this.innerHTML = this._refHTML;
     // Populate this.$
     for (let key of Object.keys(this.$)) {
-      this.$[key] = this._root.querySelector(this.$[key]);
+      this.$[key] = this.querySelector(this.$[key]);
     }
   }
 };

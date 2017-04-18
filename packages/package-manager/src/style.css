@@ -5,6 +5,10 @@ package-manager-page {
   width: 100%;
 }
 
+#package-manager-heading {
+  margin-top: 2rem;
+}
+
 package-manager-card {
   width: calc(100% - 4rem);
   margin-top: 2rem;
@@ -26,4 +30,9 @@ package-manager-card {
 
 #package-manager-input {
   margin-right: 1rem;
+}
+
+package-manager-message {
+  display: block;
+  padding: 1rem 0;
 }

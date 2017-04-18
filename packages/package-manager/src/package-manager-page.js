@@ -1,18 +1,29 @@
 import html from './package-manager-page.html';
+import ref from '@thp/mixins/ref';
 
-class Component extends HTMLElement {
+class Component extends ref(HTMLElement) {
+  constructor() {
+    super({
+      html,
+      $: {
+        button: '#package-manager-form button',
+        form: '#package-manager-form',
+        input: '#package-manager-input',
+        message: 'package-manager-message',
+        tbody: '#package-manager-list tbody',
+      },
+    });
+  }
+
   connectedCallback() {
-    this.innerHTML = html;
+    super.connectedCallback();
 
-
-
-    const tbody = this.querySelector('#package-manager-list tbody');
-
+    // Populate the table
     const keys = Object.keys(window.packages);
     keys.sort();
     for (const key of keys) {
       const pkg = window.packages[key];
-      const row = tbody.insertRow();
+      const row = this.$.tbody.insertRow();
       let version = pkg.version;
       if (!version) {
         version = '(linked)';
@@ -20,10 +31,22 @@ class Component extends HTMLElement {
       row.insertCell().insertAdjacentText('beforeend', pkg.name);
       row.insertCell().insertAdjacentText('beforeend', version);
     }
+
+    // Bind to form submit
+    this.$.form.addEventListener('submit', () => this._install());
   }
 
   _install() {
-    const pkg = this.querySelector('#package-manager-input').value;
+    const pkg = this.$.input.value.toLowerCase();
+    if (!pkg) {
+      return;
+    }
+
+    if (window.packages[pkg] !== undefined) {
+      this.$.message.innerText = `Package already installed`;
+      return;
+    }
+
     this.$.message.innerText = '';
     this.$.button.setAttribute('disabled', 'disabled');
     fetch('/_/package/install', {
