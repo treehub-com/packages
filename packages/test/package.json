@@ -7,9 +7,6 @@
     "build": "rollup -c ../../.rollup.component.config.js",
     "watch": "npm run build -- -w"
   },
-  "dependencies": {
-    "@thp/mixins": "*"
-  },
   "devDependencies": {
     "@treehub/cli": "0.3.0",
     "rollup": "0.41.6"
