@@ -6,7 +6,7 @@ import taskbar from './app-taskbar.js';
 import page from './app-page.js';
 import aside from './app-aside.js';
 
-document.head.insertAdjacentHTML('beforeend', `<style>\n${css}</style>`);
+document.head.insertAdjacentHTML('beforeend', `<style>${css}</style>`);
 window.customElements.define('app-app', app);
 window.customElements.define('app-nav', nav);
 window.customElements.define('app-nav-logo', navLogo);

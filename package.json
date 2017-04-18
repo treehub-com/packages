@@ -6,7 +6,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "new-component": "./scripts/new-component",
-    "new-package": "./scripts/new-package"
+    "new-package": "./scripts/new-package",
+    "watch": "lerna run watch --stream"
   },
   "author": "John Clark <john@treehub.com>",
   "license": "MIT",

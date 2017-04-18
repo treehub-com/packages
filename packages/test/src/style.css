@@ -1,0 +1,14 @@
+test-page {
+  padding: 2rem;
+}
+test-aside {
+  padding: 2rem;
+}
+test-card {
+  display: block;
+  padding: 1rem;
+  margin-top: 2rem;
+  background-color: var(--color-white);
+  border-radius: .25rem;
+  box-shadow: var(--shadow-1);
+}
