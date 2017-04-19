@@ -1,0 +1,36 @@
+tree-page {
+  width: 100%;
+}
+tree-trees {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#tree-trees-heading {
+  margin-top: 2rem;
+}
+tree-trees-card {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 4rem);
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: .25rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-1);
+}
+tree-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+tree-person-card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: .25rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-1);
+}

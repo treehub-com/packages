@@ -7,7 +7,7 @@
     "bootstrap": "lerna bootstrap",
     "new-component": "./scripts/new-component",
     "new-package": "./scripts/new-package",
-    "watch": "lerna run watch --stream"
+    "watch": "lerna run watch --stream --concurrency 128"
   },
   "author": "John Clark <john@treehub.com>",
   "license": "MIT",
