@@ -25,7 +25,6 @@ tree-person {
   align-items: center;
   justify-content: center;
 }
-
 tree-person-card {
   display: flex;
   flex-direction: column;
