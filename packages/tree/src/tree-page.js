@@ -23,14 +23,14 @@ class Component extends attr(HTMLElement) {
 
     switch(parts.length) {
       case 0:
-        // TODO look at spaces context
-        return window.page = '/tree/_';
+        const space = document.querySelector('app-space');
+        return window.page = `/tree/${space.space}`;
       case 1:
         return this.innerHTML = `<tree-trees space="${parts[0]}"></tree-trees>`;
       case 2:
-        // Forward to the space for now.
+        // TODO Forward to the space for now.
         // Eventually forward to default person
-        return window.page = '/tree/_';
+        return window.page = `/tree/${parts[0]}`;
       case 3:
         return this.innerHTML = `<tree-person space="${parts[0]}" tree="${parts[1]}" person="${parts[2]}"></tree-person>`; // eslint-disable-line max-len
     }

@@ -2,8 +2,8 @@ class Component extends HTMLElement {
   constructor() {
     super();
     this.addEventListener('click', () => {
-      // TODO pull current space from the spaces package
-      window.page = '/tree/_';
+      const space = document.querySelector('app-space');
+      window.page = `/tree/${space.space}`;
     });
   }
 
