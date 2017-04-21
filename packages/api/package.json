@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "bundle": "treehub bundle ."
+    "publish": "treehub publish ."
   },
   "dependencies": {
     "treehub-spaces": "0.0.0"
