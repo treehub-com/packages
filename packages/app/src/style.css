@@ -38,15 +38,22 @@ app-main {
   display: flex;
   flex-direction: column;
 }
-app-taskbar {
+app-header {
   display: flex;
-  justify-content: flex-end;
   height: 4rem;
+  font-size: 1.25rem;
   background-color: var(--color-black);
   color: var(--color-white);
 }
+app-space {
+  padding: 1.25rem 0 0 1.25rem;
+}
+app-taskbar {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
 app-taskbar > * {
-  font-size: 1.25rem;
   padding: 1.25rem 1.25rem 0 0;
   cursor: pointer;
 }
