@@ -5,6 +5,7 @@
   "description": "Treehub packages",
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
     "new-component": "./scripts/new-component",
     "new-package": "./scripts/new-package",
     "watch": "lerna run watch --stream --concurrency 128"
