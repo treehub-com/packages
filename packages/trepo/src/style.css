@@ -1,0 +1,11 @@
+trepo--header {
+  display: flex;
+}
+trepo--title {
+  flex: 1;
+}
+
+trepo-name {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,40 +1,29 @@
-import template from './trepo-name.html';
-import attr from '@thp/mixins/attr';
-import form from '@thp/mixins/form';
-import graphql from '@thp/mixins/graphql';
-import $ from '@thp/mixins/$';
-import html from '@thp/mixins/html';
+import html from './trepo-name.html';
+import Base from './trepo--form-base.js';
 
-class Component extends graphql(form(attr($(html(HTMLElement))))) {
+class Component extends Base {
   constructor() {
     super({
       attributes: Component.observedAttributes,
-      html: template,
+      html,
       $: {
-        name: '#trepo-name-name',
+        name: 'trepo--input[label="Full Name"]',
       },
-      form: 'form',
     });
-    this._init = {};
   }
 
   static get observedAttributes() {
-    return [
+    return super.observedAttributes.concat([
       'node',
       'person',
-      'repo',
-    ];
-  }
-
-  init(data) {
-    this._init = data;
+    ]);
   }
 
   connectedCallback() {
     super.connectedCallback();
 
     // Populate inputs
-    this.$.name.value = this._init.name;
+    this.$.name.value = this._value.name;
 
     // Initialize the form
     this._form({
@@ -44,31 +33,20 @@ class Component extends graphql(form(attr($(html(HTMLElement))))) {
   }
 
   async _create() {
-    const {id} = this._mutation({
-      url: this.repo,
+    const {id} = await super._create({
       query: 'createName(input: $input) { id }',
       type: 'NameCreateInput',
       input: {
         person: this.person,
         name: this.$.name.value,
       },
-    });
-    await this._mutation({
-      url: '/api/_/personal',
-      query: 'commit(input: $input) { id }',
-      type: 'CommitInput',
-      input: {
-        author: 'TreeBot',
-        email: 'treebot@treehub.com',
-        message: 'Create Name',
-      },
+      message: 'Create Name',
     });
     this.node = id;
   }
 
   async _update() {
-    this._mutation({
-      url: this.repo,
+    await super._create({
       query: 'UpdateName(input: $input) { id }',
       type: 'NameUpdateInput',
       input: {
@@ -76,37 +54,18 @@ class Component extends graphql(form(attr($(html(HTMLElement))))) {
         person: this.person,
         name: this.$.name.value,
       },
-    });
-    await this._mutation({
-      url: '/api/_/personal',
-      query: 'commit(input: $input) { id }',
-      type: 'CommitInput',
-      input: {
-        author: 'TreeBot',
-        email: 'treebot@treehub.com',
-        message: 'Update Name',
-      },
+      message: 'Update Name',
     });
   }
 
   async _delete() {
-    this._mutation({
-      url: this.repo,
+    await super._create({
       query: 'DeleteName(input: $input) { id }',
       type: 'DeleteInput',
       input: {
         id: this.node,
       },
-    });
-    await this._mutation({
-      url: '/api/_/personal',
-      query: 'commit(input: $input) { id }',
-      type: 'CommitInput',
-      input: {
-        author: 'TreeBot',
-        email: 'treebot@treehub.com',
-        message: 'Delete Name',
-      },
+      message: 'Delete Name',
     });
     this.node = null;
   }

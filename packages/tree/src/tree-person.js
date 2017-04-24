@@ -28,18 +28,18 @@ class Component extends graphql(ref(attr(HTMLElement))) {
   }
 
   _personChanged(newPerson, oldPerson) {
-    this._getPerson(newPerson);
-  }
-
-  async _getPerson(id) {
-    const person = await this._query({
-      url: `/api/${this.space}/${this.tree}`,
-      query: 'person(id: $input) { name {id name} }',
-      type: 'String',
-      input: id,
-    });
-
-    this.$.card.textContent = person.name.name;
+    const personMini = document.createElement('trepo-person-mini');
+    personMini.value = {
+      name: 'fake',
+      birth: '1800',
+      death: '1900',
+    };
+    const personData = document.createElement('trepo-person-data');
+    personData.repo = `/api/${this.space}/${this.tree}`;
+    personData.person = this.person;
+    this.$.card.innerHTML = '';
+    this.$.card.appendChild(personMini);
+    this.$.card.appendChild(personData);
   }
 }
 
