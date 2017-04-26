@@ -1,11 +1,11 @@
 import html from './trepo-name.html';
-import Base from './trepo--form-base.js';
+import Base from './Base.js';
+import {commit} from '@thp/lib/graphql';
 
 class Component extends Base {
   constructor() {
     super({
       attributes: Component.observedAttributes,
-      html,
       $: {
         name: 'trepo--input[label="Full Name"]',
       },
@@ -13,27 +13,30 @@ class Component extends Base {
   }
 
   static get observedAttributes() {
-    return super.observedAttributes.concat([
+    return [
       'node',
       'person',
-    ]);
+      'repo',
+    ];
   }
 
   connectedCallback() {
+    this.innerHTML = html;
     super.connectedCallback();
 
     // Populate inputs
-    this.$.name.value = this._value.name;
+    // this.$.name.value = this._value.name;
 
     // Initialize the form
-    this._form({
-      extant: this.node,
-      loaded: true,
-    });
+    // this._form({
+    //   extant: this.node,
+    //   loaded: true,
+    // });
   }
 
   async _create() {
-    const {id} = await super._create({
+    const {id} = await commit({
+      url: this.repo,
       query: 'createName(input: $input) { id }',
       type: 'NameCreateInput',
       input: {
@@ -46,7 +49,8 @@ class Component extends Base {
   }
 
   async _update() {
-    await super._create({
+    await commit({
+      url: this.repo,
       query: 'UpdateName(input: $input) { id }',
       type: 'NameUpdateInput',
       input: {
@@ -59,7 +63,8 @@ class Component extends Base {
   }
 
   async _delete() {
-    await super._create({
+    await commit({
+      url: this.repo,
       query: 'DeleteName(input: $input) { id }',
       type: 'DeleteInput',
       input: {
