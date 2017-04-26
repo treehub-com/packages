@@ -29,14 +29,12 @@ class Component extends Base {
     this.$.name.value = this.value.name;
 
     // Initialize the form
-    this.init({
+    this.loaded({
       extant: this.node,
-      loaded: true,
     });
   }
 
   async _create() {
-    return console.log('create');
     const {id} = await commit({
       url: this.repo,
       query: 'createName(input: $input) { id }',
@@ -51,10 +49,9 @@ class Component extends Base {
   }
 
   async _update() {
-    return console.log('create');
     await commit({
       url: this.repo,
-      query: 'UpdateName(input: $input) { id }',
+      query: 'updateName(input: $input) { id }',
       type: 'NameUpdateInput',
       input: {
         id: this.node,
@@ -66,10 +63,9 @@ class Component extends Base {
   }
 
   async _delete() {
-    return console.log('create');
     await commit({
       url: this.repo,
-      query: 'DeleteName(input: $input) { id }',
+      query: 'deleteName(input: $input)',
       type: 'DeleteInput',
       input: {
         id: this.node,

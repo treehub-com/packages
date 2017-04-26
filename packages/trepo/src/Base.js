@@ -13,41 +13,37 @@ class Component extends attr($(HTMLElement)) {
     form.addEventListener('create', () => {
       this._create()
         .then(() => {
-          this._form.created();
+          form.dispatchEvent(new Event('created'));
         })
         .catch((error) => {
-          this._form.errored(error.message);
+          form.dispatchEvent(new CustomEvent('errored', {detail: error}));
         });
     });
     form.addEventListener('update', () => {
       this._update()
         .then(() => {
-          this._form.updated();
+          form.dispatchEvent(new Event('updated'));
         })
         .catch((error) => {
-          this._form.errored(error.message);
+          form.dispatchEvent(new CustomEvent('errored', {detail: error}));
         });
     });
     form.addEventListener('delete', () => {
       this._delete()
         .then(() => {
-          this._form.deleted();
+          form.dispatchEvent(new Event('deleted'));
         })
         .catch((error) => {
-          this._form.errored(error.message);
+          form.dispatchEvent(new CustomEvent('errored', {detail: error}));
         });
     });
   }
 
-  init({extant, loaded}) {
+  loaded({extant}) {
     const form = this.querySelector('form');
-    if (extant) {
-      form.extant = true;
-    }
-    if (loaded) {
-      form.loaded = true;
-      form.dispatchEvent(new Event('loaded'));
-    }
+    const state = (extant) ? 'extant' : 'new';
+    form.loaded = state;
+    form.dispatchEvent(new CustomEvent('loaded', {detail: state}));
   }
 
 }

@@ -1,3 +1,7 @@
+.trepo--form {
+  display: flex;
+  flex-direction: column;
+}
 trepo--header {
   display: flex;
 }
@@ -16,6 +20,14 @@ trepo--input > label::after {
 }
 trepo--input > input[disabled] {
   border: 0;
+}
+trepo--form-controls {
+  display: none;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+.trepo--form[enabled] trepo--form-controls {
+  display: flex;
 }
 
 trepo-name {
