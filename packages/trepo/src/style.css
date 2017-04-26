@@ -29,7 +29,24 @@ trepo--form-controls {
 .trepo--form[enabled] trepo--form-controls {
   display: flex;
 }
-
+trepo-person-data {
+  display: flex;
+  flex-direction: column;
+}
+trepo-person-data-new {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(55,55,55,.13);
+}
+.trepo-person-data-add {
+  margin-left: 1rem;
+}
+trepo-person-data-data > * {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(55,55,55,.13);
+}
 trepo-name {
   display: flex;
   flex-direction: column;
