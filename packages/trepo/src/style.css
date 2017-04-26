@@ -4,7 +4,10 @@ trepo--header {
 trepo--title {
   flex: 1;
 }
-
+trepo--form-toggle {
+  color: var(--color-blue);
+  cursor: pointer;
+}
 trepo-name {
   display: flex;
   flex-direction: column;
