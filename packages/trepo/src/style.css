@@ -8,6 +8,16 @@ trepo--form-toggle {
   color: var(--color-blue);
   cursor: pointer;
 }
+trepo--input > label {
+  padding-right: .5rem;
+}
+trepo--input > label::after {
+  content: ":";
+}
+trepo--input > input[disabled] {
+  border: 0;
+}
+
 trepo-name {
   display: flex;
   flex-direction: column;

@@ -26,7 +26,7 @@ class Component extends Base {
     super.connectedCallback();
 
     // Populate inputs
-    // this.$.name.value = this._value.name;
+    this.$.name.value = this.value.name;
 
     // Initialize the form
     this.init({
@@ -36,6 +36,7 @@ class Component extends Base {
   }
 
   async _create() {
+    return console.log('create');
     const {id} = await commit({
       url: this.repo,
       query: 'createName(input: $input) { id }',
@@ -50,6 +51,7 @@ class Component extends Base {
   }
 
   async _update() {
+    return console.log('create');
     await commit({
       url: this.repo,
       query: 'UpdateName(input: $input) { id }',
@@ -64,6 +66,7 @@ class Component extends Base {
   }
 
   async _delete() {
+    return console.log('create');
     await commit({
       url: this.repo,
       query: 'DeleteName(input: $input) { id }',
