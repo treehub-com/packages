@@ -1,7 +1,7 @@
 import attr from '@thp/mixins/attr';
-import graphql from '@thp/mixins/graphql';
+import {query} from '@thp/lib/graphql';
 
-class Component extends graphql(attr(HTMLElement)) {
+class Component extends attr(HTMLElement) {
   constructor() {
     super({
       attributes: Component.observedAttributes,
@@ -25,7 +25,7 @@ class Component extends graphql(attr(HTMLElement)) {
   }
 
   async _getPerson(id) {
-    const person = await this._query({
+    const person = await query({
       url: this.repo,
       query: `person(id: $input) {
         name {id name}
@@ -34,7 +34,12 @@ class Component extends graphql(attr(HTMLElement)) {
       input: id,
     });
 
-    this.innerText = person.name.name;
+    const name = document.createElement('trepo-name');
+    name.repo = this.repo;
+    name.person = id;
+    name.node = person.name.id;
+    name.value = person.name;
+    this.appendChild(name);
   }
 }
 

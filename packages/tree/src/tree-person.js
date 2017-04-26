@@ -36,7 +36,7 @@ class Component extends graphql(ref(attr(HTMLElement))) {
     };
     const personData = document.createElement('trepo-person-data');
     personData.repo = `/api/${this.space}/${this.tree}`;
-    personData.person = this.person;
+    personData.person = newPerson;
     this.$.card.innerHTML = '';
     this.$.card.appendChild(personMini);
     this.$.card.appendChild(personData);

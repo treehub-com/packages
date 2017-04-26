@@ -4,19 +4,13 @@ import $ from '@thp/mixins/$';
 class Component extends attr($(HTMLElement)) {
   constructor(args) {
     super(args);
-    this._value = {};
-    this._form;
-  }
-
-  set value(data) {
-    this._value = data;
   }
 
   connectedCallback() {
     super.connectedCallback();
 
-    this._form = this.querySelector('form');
-    this.$.form.addEventListener('create', () => {
+    const form = this.querySelector('form');
+    form.addEventListener('create', () => {
       this._create()
         .then(() => {
           this._form.created();
@@ -25,7 +19,7 @@ class Component extends attr($(HTMLElement)) {
           this._form.errored(error.message);
         });
     });
-    this.$.form.addEventListener('update', () => {
+    form.addEventListener('update', () => {
       this._update()
         .then(() => {
           this._form.updated();
@@ -34,7 +28,7 @@ class Component extends attr($(HTMLElement)) {
           this._form.errored(error.message);
         });
     });
-    this.$.form.addEventListener('delete', () => {
+    form.addEventListener('delete', () => {
       this._delete()
         .then(() => {
           this._form.deleted();
@@ -45,13 +39,14 @@ class Component extends attr($(HTMLElement)) {
     });
   }
 
-  _form({extant, loaded}) {
+  init({extant, loaded}) {
+    const form = this.querySelector('form');
     if (extant) {
-      this._form.extant = true;
+      form.extant = true;
     }
     if (loaded) {
-      this._form.loaded = true;
-      this._form.dispatchEvent(new Event('loaded'));
+      form.loaded = true;
+      form.dispatchEvent(new Event('loaded'));
     }
   }
 

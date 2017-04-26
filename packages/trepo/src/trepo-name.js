@@ -10,6 +10,7 @@ class Component extends Base {
         name: 'trepo--input[label="Full Name"]',
       },
     });
+    this.value = {}; // Default value
   }
 
   static get observedAttributes() {
@@ -28,10 +29,10 @@ class Component extends Base {
     // this.$.name.value = this._value.name;
 
     // Initialize the form
-    // this._form({
-    //   extant: this.node,
-    //   loaded: true,
-    // });
+    this.init({
+      extant: this.node,
+      loaded: true,
+    });
   }
 
   async _create() {
