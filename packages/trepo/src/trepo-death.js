@@ -1,4 +1,4 @@
-import html from './trepo-name.html';
+import html from './trepo-death.html';
 import Base from './Base.js';
 import {commit} from '@thp/lib/graphql';
 
@@ -7,7 +7,8 @@ class Component extends Base {
     super({
       attributes: Component.observedAttributes,
       $: {
-        name: 'trepo--input[label="Full Name"]',
+        date: 'trepo--date',
+        place: 'trepo--place',
       },
     });
     this.value = {}; // Default value
@@ -26,7 +27,8 @@ class Component extends Base {
     super.connectedCallback();
 
     // Populate inputs
-    this.$.name.value = this.value.name || '';
+    this.$.date.value = this.value.date || {};
+    this.$.place.value = this.value.place || {};
 
     // Initialize the form
     this.loaded({
@@ -37,13 +39,14 @@ class Component extends Base {
   async _create() {
     const {id} = await commit({
       url: this.repo,
-      query: 'createName(input: $input) { id }',
-      type: 'NameCreateInput',
+      query: 'createDeath(input: $input) { id }',
+      type: 'DeathCreateInput',
       input: {
         person: this.person,
-        name: this.$.name.value,
+        date: this.$.date.value,
+        place: this.$.place.value,
       },
-      message: 'Create Name',
+      message: 'Create Death',
     });
     this.node = id;
   }
@@ -51,26 +54,27 @@ class Component extends Base {
   async _update() {
     await commit({
       url: this.repo,
-      query: 'updateName(input: $input) { id }',
-      type: 'NameUpdateInput',
+      query: 'updateDeath(input: $input) { id }',
+      type: 'DeathUpdateInput',
       input: {
         id: this.node,
         person: this.person,
-        name: this.$.name.value,
+        date: this.$.date.value,
+        place: this.$.place.value,
       },
-      message: 'Update Name',
+      message: 'Update Death',
     });
   }
 
   async _delete() {
     await commit({
       url: this.repo,
-      query: 'deleteName(input: $input)',
+      query: 'deleteDeath(input: $input)',
       type: 'DeleteInput',
       input: {
         id: this.node,
       },
-      message: 'Delete Name',
+      message: 'Delete Death',
     });
     this.node = null;
   }

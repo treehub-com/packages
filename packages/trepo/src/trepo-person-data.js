@@ -55,6 +55,7 @@ class Component extends attr($(HTMLElement)) {
       url: this.repo,
       query: `person(id: $input) {
         name {id name}
+        death {id place {name} date {original}}
       }`,
       type: 'String',
       input: id,
@@ -66,22 +67,39 @@ class Component extends attr($(HTMLElement)) {
     name.node = person.name.id;
     name.value = person.name;
     this.$.data.appendChild(name);
+
+    if (person.death) {
+      const death = document.createElement('trepo-death');
+      death.repo = this.repo;
+      death.person = id;
+      death.node = person.name.id;
+      death.value = person.death;
+      this.$.data.appendChild(death);
+    }
+
+    // TODO bind to deleted event and remove element?
   }
 
   add() {
     const element = this.$.select.value;
     const elem = document.createElement(element);
+    // Set properties
+    elem.repo = this.repo;
+    elem.person = this.person;
 
+    // Set additional properties based on type
     switch(element) {
-      case 'trepo-name':
-        elem.repo = this.repo;
-        elem.person = this.person;
+      case 'trepo-birth':
+        // TODO set role properly
+        elem.role = 'child';
         break;
     }
 
-    // TODO bind to create/"cancel" and move/delete element
+    // TODO bind to created/"cancel" and move/delete element
 
+    // Insert the element and enable the form
     this.$.data.insertAdjacentElement('afterbegin', elem);
+    elem.form.dispatchEvent(new Event('enabled'));
   }
 
   // TODO a function to order the data elements
