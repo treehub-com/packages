@@ -3,15 +3,16 @@ const Mixin = (superclass) => class $ extends superclass {
     superclass.name === 'HTMLElement' ? super() : super(args);
 
     const {$ = {}} = args;
-    this.$ = $;
+    this._$ = $;
   }
 
   connectedCallback() {
     if (super.connectedCallback) {
       super.connectedCallback();
     }
-    for (let key of Object.keys(this.$)) {
-      this.$[key] = this.querySelector(this.$[key]);
+    this.$ = {};
+    for (let key of Object.keys(this._$)) {
+      this.$[key] = this.querySelector(this._$[key]);
     }
   }
 };

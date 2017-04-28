@@ -67,6 +67,17 @@ trepo-person-data-data > * {
   padding: 1rem;
   border-bottom: 1px solid rgba(55,55,55,.13);
 }
+trepo-person-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+trepo-person-mini-name {
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
 trepo-name,
 trepo-birth,
 trepo-marriage,
