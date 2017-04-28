@@ -26,18 +26,55 @@ tree-person {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   width: 100%;
+}
+tree-person-children {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  bottom: 0;
+}
+tree-person-spouses {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 4rem;
+  right: 4rem;
+}
+tree-person-parents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  bottom: 0;
+}
+tree-person-children > trepo-person-mini,
+tree-person-spouses > trepo-person-mini,
+tree-person-parents > trepo-person-mini {
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: .25rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-1);
 }
 tree-person-card {
   align-self: flex-end;
   display: flex;
   flex-direction: column;
+  max-height: calc(50% + 7rem);
+  overflow-y: auto;
   padding: 1rem;
   border-radius: .25rem;
   background-color: var(--color-white);
   box-shadow: var(--shadow-1);
 }
-
 tree-person-card > trepo-person-mini {
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(55,55,55,.13);
