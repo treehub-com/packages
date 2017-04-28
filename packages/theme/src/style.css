@@ -15,27 +15,27 @@
   --shadow-2: 0 4px 10px 0 rgba(55,55,55,0.67);
 }
 h1 {
-  font-size: 4rem;
-  font-weight: normal;
-  line-height: 1;
-}
-h2 {
   font-size: 3rem;
   font-weight: normal;
   line-height: 1;
 }
-h3 {
+h2 {
   font-size: 2rem;
   font-weight: normal;
   line-height: 1;
 }
-h4 {
+h3 {
   font-size: 1.5rem;
   font-weight: normal;
   line-height: 1;
 }
+h4 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  line-height: 1;
+}
 input {
-  padding: .5rem 1rem;
+  padding: .5rem;
   border: 1px solid rgba(55,55,55,0.13);
   border-radius: .25rem;
   font-size: inherit;

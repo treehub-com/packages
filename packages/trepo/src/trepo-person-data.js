@@ -5,9 +5,10 @@ import {query} from '@thp/lib/graphql';
 
 const types = [
   {name: 'Name', element: 'trepo-name'},
-  {name: 'Birth', element: 'trepo-birth'},
+  {name: 'Birth', element: 'trepo-birth', role: 'child'},
   {name: 'Marriage', element: 'trepo-marriage'},
-  {name: 'Child', element: 'trepo-birth'}, // TODO determine where to set person
+  {name: 'Child (As Father)', element: 'trepo-birth', role: 'father'},
+  {name: 'Child (As Mother)', element: 'trepo-birth', role: 'mother'},
   {name: 'Death', element: 'trepo-death'},
 ];
 
@@ -39,8 +40,13 @@ class Component extends attr($(HTMLElement)) {
 
     // Populate select
     for (let type of types) {
-      const elem = `<option value="${type.element}">${type.name}</option>`;
-      this.$.select.insertAdjacentHTML('beforeend', elem);
+      const elem = document.createElement('option');
+      elem.value = type.element;
+      elem.textContent = type.name;
+      if (type.role) {
+        elem.role = type.role;
+      }
+      this.$.select.insertAdjacentElement('beforeend', elem);
     }
 
     this._personChanged(this.person, null);
@@ -72,7 +78,7 @@ class Component extends attr($(HTMLElement)) {
       const death = document.createElement('trepo-death');
       death.repo = this.repo;
       death.person = id;
-      death.node = person.name.id;
+      death.node = person.death.id;
       death.value = person.death;
       this.$.data.appendChild(death);
     }
@@ -90,16 +96,22 @@ class Component extends attr($(HTMLElement)) {
     // Set additional properties based on type
     switch(element) {
       case 'trepo-birth':
-        // TODO set role properly
-        elem.role = 'child';
+        const idx = this.$.select.selectedIndex;
+        const role = this.$.select.childNodes[idx].role;
+        elem.role = role;
         break;
     }
-
-    // TODO bind to created/"cancel" and move/delete element
 
     // Insert the element and enable the form
     this.$.data.insertAdjacentElement('afterbegin', elem);
     elem.form.dispatchEvent(new Event('enabled'));
+    // TODO bind to created/"cancel" and move/delete element
+    const removeOnCancel = () => elem.remove();
+    elem.form.addEventListener('disabled', removeOnCancel);
+    elem.form.addEventListener('created', () => {
+      elem.form.removeEventListener('disabled', removeOnCancel);
+      // TODO reorder the elements
+    });
   }
 
   // TODO a function to order the data elements

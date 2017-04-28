@@ -72,6 +72,10 @@ class Component extends attr($(HTMLElement)) {
     }
   }
 
+  _labelChanged(newValue, oldValue) {
+    this.$.label.textContent = newValue;
+  }
+
   _findParentForm() {
     let node = this.parentNode;
     while (node) {
