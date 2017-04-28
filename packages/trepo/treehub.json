@@ -1,0 +1,7 @@
+{
+  "name": "trepo",
+  "description": "Trepo Web Components",
+  "components": [
+    "components.js"
+  ]
+}

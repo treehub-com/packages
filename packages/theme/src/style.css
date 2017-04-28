@@ -14,33 +14,48 @@
   --shadow-1: 0 2px 4px 0 rgba(55,55,55,0.67);
   --shadow-2: 0 4px 10px 0 rgba(55,55,55,0.67);
 }
-h1 {
-  font-size: 4rem;
-  font-weight: normal;
-  line-height: 1;
+*[hidden] {
+  display: none;
 }
-h2 {
+h1 {
   font-size: 3rem;
   font-weight: normal;
   line-height: 1;
 }
-h3 {
+h2 {
   font-size: 2rem;
   font-weight: normal;
   line-height: 1;
 }
-h4 {
+h3 {
   font-size: 1.5rem;
   font-weight: normal;
   line-height: 1;
 }
+h4 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  line-height: 1;
+}
 input {
-  padding: .5rem 1rem;
-  border: 1px solid rgba(55,55,55,0.13);
-  border-radius: .25rem;
+  padding: .5rem;
+  font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: 1;
+  border: 1px solid rgba(55,55,55,0.13);
+  border-radius: .25rem;
+}
+select {
+  height: 2em;
+  padding: .5rem;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1;
+  background-color: var(--color-white);
+  border: 1px solid rgba(55,55,55,0.13);
+  border-radius: .25rem;
 }
 button {
   padding: .5rem 1rem;
@@ -58,4 +73,13 @@ button[type="submit"] {
 }
 button[disabled] {
   background-color: var(--color-gray-light);
+}
+a,
+a:link,
+a:visited,
+a:hover,
+a:focus,
+a:active {
+  color: var(--color-blue);
+  text-decoration: none;
 }

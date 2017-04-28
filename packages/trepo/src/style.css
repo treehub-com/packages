@@ -1,0 +1,92 @@
+.trepo--form {
+  display: flex;
+  flex-direction: column;
+}
+trepo--header {
+  display: flex;
+  margin-bottom: .5rem;
+}
+trepo--title {
+  flex: 1;
+  font-size: 1.25rem;
+}
+trepo--form-toggle {
+  color: var(--color-blue);
+  cursor: pointer;
+}
+.trepo--form[enabled] trepo--input {
+  margin-bottom: 1rem;
+}
+trepo--input,
+trepo--person,
+trepo--date,
+trepo--place {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+trepo--input > label {
+  padding-right: .5rem;
+  white-space: nowrap;
+}
+trepo--input > label::after {
+  content: ":";
+}
+trepo--input > input {
+  width: 100%;
+}
+trepo--input > input[disabled] {
+  border: 0;
+}
+trepo--form-controls {
+  display: none;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+.trepo--form[enabled] trepo--form-controls {
+  display: flex;
+}
+trepo--form-controls > * {
+  margin-left: 1rem;
+}
+trepo-person-data {
+  display: flex;
+  flex-direction: column;
+}
+trepo-person-data-new {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(55,55,55,.13);
+}
+.trepo-person-data-select {
+  width: 100%;
+}
+.trepo-person-data-add {
+  margin-left: 1rem;
+}
+trepo-person-data-data > * {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(55,55,55,.13);
+}
+trepo-person-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 1rem;
+}
+trepo-person-mini-name {
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+trepo-name,
+trepo-birth,
+trepo-marriage,
+trepo-death {
+  display: flex;
+  flex-direction: column;
+}
