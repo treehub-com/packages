@@ -8,7 +8,7 @@
     "publish": "treehub publish ."
   },
   "dependencies": {
-    "treehub-spaces": "0.0.0"
+    "@treehub/spaces": "0.1.0"
   },
   "devDependencies": {
     "babili-webpack-plugin": "0.0.10",
