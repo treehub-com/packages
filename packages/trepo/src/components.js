@@ -7,6 +7,7 @@ import place from './trepo--place.js';
 import formControls from './trepo--form-controls.js';
 import personData from './trepo-person-data.js';
 import name from './trepo-name.js';
+import birth from './trepo-birth.js';
 import marriage from './trepo-marriage.js';
 import death from './trepo-death.js';
 
@@ -19,5 +20,6 @@ window.customElements.define('trepo--place', place);
 window.customElements.define('trepo--form-controls', formControls);
 window.customElements.define('trepo-person-data', personData);
 window.customElements.define('trepo-name', name);
+window.customElements.define('trepo-birth', birth);
 window.customElements.define('trepo-marriage', marriage);
 window.customElements.define('trepo-death', death);

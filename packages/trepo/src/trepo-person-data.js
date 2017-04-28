@@ -61,6 +61,7 @@ class Component extends attr($(HTMLElement)) {
       url: this.repo,
       query: `person(id: $input) {
         name {id name}
+        birth {id mother {id name {name}} father {id name {name}} child {id name {name}} place {name} date {original}}
         death {id place {name} date {original}}
         marriages {id spouses {id name {name}} place {name} date {original}}
       }`,
@@ -74,6 +75,16 @@ class Component extends attr($(HTMLElement)) {
     name.node = person.name.id;
     name.value = person.name;
     this.$.data.appendChild(name);
+
+    if (person.birth) {
+      const birth = document.createElement('trepo-birth');
+      birth.repo = this.repo;
+      birth.person = id;
+      birth.node = person.birth.id;
+      birth.role = 'child';
+      birth.value = person.birth;
+      this.$.data.appendChild(birth);
+    }
 
     if (person.marriages) {
       for (let marriage of person.marriages) {

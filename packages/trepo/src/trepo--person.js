@@ -13,7 +13,7 @@ class Component extends attr($(HTMLElement)) {
       },
     });
     // Default values
-    this._value = {};
+    this._value = {}; // Looks like {id, name: {name}}
   }
 
   static get observedAttributes() {
