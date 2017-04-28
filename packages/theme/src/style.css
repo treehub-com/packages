@@ -62,3 +62,12 @@ button[type="submit"] {
 button[disabled] {
   background-color: var(--color-gray-light);
 }
+a,
+a:link,
+a:visited,
+a:hover,
+a:focus,
+a:active {
+  color: var(--color-blue);
+  text-decoration: none;
+}

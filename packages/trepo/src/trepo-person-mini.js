@@ -34,7 +34,15 @@ class Component extends $(HTMLElement) {
   }
 
   updateUI() {
-    this.$.name.textContent = this.value.name;
+    this.$.name.innerHTML = '';
+    if (this.value.url) {
+      const a = document.createElement('a');
+      a.href = this.value.url;
+      a.textContent = this.value.name;
+      this.$.name.appendChild(a);
+    } else {
+      this.$.name.textContent = this.value.name;
+    }
     this.$.lifespan.textContent = `${this.value.birth} - ${this.value.death}`;
   }
 }

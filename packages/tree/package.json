@@ -9,6 +9,7 @@
     "watch": "npm run build -- -w"
   },
   "dependencies": {
+    "@thp/lib": "*",
     "@thp/mixins": "*"
   },
   "devDependencies": {
