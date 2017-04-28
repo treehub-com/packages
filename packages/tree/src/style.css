@@ -29,20 +29,45 @@ tree-person {
   position: relative;
   width: 100%;
 }
+tree-person-children-label,
+tree-person-spouses-label,
+tree-person-parents-label {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-green);
+}
+tree-person-children-label {
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: rotate(-90deg);
+  transform-origin: center top;
+}
+tree-person-spouses-label {
+  position: absolute;
+  top: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+tree-person-parents-label {
+  position: absolute;
+  right: -1.5rem;
+  top: 50%;
+  transform: rotate(90deg);
+  transform-origin: center top;
+}
 tree-person-children {
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  top: 4rem;
-  left: 0;
-  bottom: 0;
+  left: 3rem;
 }
 tree-person-spouses {
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 0;
+  top: 3rem;
   left: 4rem;
   right: 4rem;
 }
@@ -51,9 +76,7 @@ tree-person-parents {
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  top: 4rem;
-  right: 0;
-  bottom: 0;
+  right: 3rem;
 }
 tree-person-children > trepo-person-mini,
 tree-person-spouses > trepo-person-mini,

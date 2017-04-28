@@ -37,9 +37,11 @@ class Component extends ref(attr(HTMLElement)) {
   }
 
   async layoutPage() {
-    const {births, marriages} = await query({
+    const {name, birth, births, marriages, death} = await query({
       url: `/api/${this.space}/${this.tree}`,
       query: `person(id: $input) {
+        name {name}
+        birth {date {original}}
         births {
           mother {id name {name} birth {date {original}} death {date {original}}}
           father {id name {name} birth {date {original}} death {date {original}}}
@@ -48,10 +50,21 @@ class Component extends ref(attr(HTMLElement)) {
         marriages {
           spouses {id name {name} birth {date {original}} death {date {original}}}
         }
+        death {date {original}}
       }`,
       type: 'String',
       input: this.person,
     });
+
+    // Self
+    const mini = document.createElement('trepo-person-mini');
+    mini.value = {
+      name: (name) ? name.name : '(Unknown)',
+      // No url for self
+      birth: (birth && birth.date) ? birth.date.original : '?', // eslint-disable-line max-len
+      death: (death && death.date) ? death.date.original : '?', // eslint-disable-line max-len
+    };
+    this.$.card.appendChild(mini);
 
     // Marriages
     if (marriages) {
@@ -76,18 +89,6 @@ class Component extends ref(attr(HTMLElement)) {
     // Births
     if (births) {
       for (let birth of births) {
-        // Self
-        if (birth.child && birth.child.id === this.person) {
-          const mini = document.createElement('trepo-person-mini');
-          mini.value = {
-            name: (birth.child.name) ? birth.child.name.name : '(Unknown)',
-            // No url for self
-            birth: (birth.child.birth && birth.child.birth.date) ? birth.child.birth.date.original : '?', // eslint-disable-line max-len
-            death: (birth.child.death && birth.child.death.date) ? birth.child.death.date.original : '?', // eslint-disable-line max-len
-          };
-          this.$.card.appendChild(mini);
-        }
-
         // Children
         if ( ((birth.mother && birth.mother.id === this.person) ||
               (birth.father && birth.father.id === this.person))
