@@ -58,6 +58,9 @@ class Component extends attr($(HTMLElement)) {
 
     // Listen for input event
     this.$.input.addEventListener('input', () => {
+      // We changed
+      this.dispatchEvent(new Event('changed'));
+      // The form changed
       this.form.dispatchEvent(new Event('changed'));
     });
 

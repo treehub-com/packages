@@ -32,8 +32,13 @@ class Component extends Base {
       for (let spouse of this.value.spouses) {
         if (spouse.id !== this.person) {
           this.$.spouse.value = spouse;
+          break;
         }
       }
+      // TODO this eventually needs to come from the spouse person
+      this.$.spouse.repo = this.repo;
+    } else {
+      this.$.spouse.repo = this.repo;
     }
     this.$.date.value = this.value.date || {};
     this.$.place.value = this.value.place || {};
@@ -45,12 +50,16 @@ class Component extends Base {
   }
 
   async _create() {
+    const spouses = [this.person];
+    if (this.$.spouse.value.id) {
+      spouses.push(this.$.spouse.value.id);
+    }
     const {id} = await commit({
       url: this.repo,
       query: 'createMarriage(input: $input) { id }',
       type: 'MarriageCreateInput',
       input: {
-        spouses: [this.person],
+        spouses,
         date: this.$.date.value,
         place: this.$.place.value,
       },
@@ -60,13 +69,17 @@ class Component extends Base {
   }
 
   async _update() {
+    const spouses = [this.person];
+    if (this.$.spouse.value.id) {
+      spouses.push(this.$.spouse.value.id);
+    }
     await commit({
       url: this.repo,
       query: 'updateMarriage(input: $input) { id }',
       type: 'MarriageUpdateInput',
       input: {
         id: this.node,
-        spouses: [this.person],
+        spouses,
         date: this.$.date.value,
         place: this.$.place.value,
       },

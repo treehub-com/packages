@@ -62,6 +62,7 @@ class Component extends attr($(HTMLElement)) {
       query: `person(id: $input) {
         name {id name}
         death {id place {name} date {original}}
+        marriages {id spouses {id name {name}} place {name} date {original}}
       }`,
       type: 'String',
       input: id,
@@ -73,6 +74,17 @@ class Component extends attr($(HTMLElement)) {
     name.node = person.name.id;
     name.value = person.name;
     this.$.data.appendChild(name);
+
+    if (person.marriages) {
+      for (let marriage of person.marriages) {
+        const elem = document.createElement('trepo-marriage');
+        elem.repo = this.repo;
+        elem.person = id;
+        elem.node = marriage.id;
+        elem.value = marriage;
+        this.$.data.appendChild(elem);
+      }
+    }
 
     if (person.death) {
       const death = document.createElement('trepo-death');
