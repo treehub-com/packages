@@ -56,6 +56,7 @@ class Component extends ref(attr(HTMLElement)) {
     this.$.card.innerHTML = '';
     this.$.card.appendChild(personMini);
     this.$.card.appendChild(personData);
+    // TODO listen for changes and update person-minis
   }
 }
 
