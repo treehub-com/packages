@@ -25,7 +25,7 @@ class Component extends graphql(attr(HTMLElement)) {
     if (path.length === 0) {
       return this._indexPage();
     }
-    const pkg = window.packages[path.shift().toLowerCase()];
+    const pkg = window._.packages[path.shift().toLowerCase()];
     if (pkg === undefined) {
       return this.innerText = 'Package not installed';
     }

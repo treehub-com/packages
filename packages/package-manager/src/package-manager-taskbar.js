@@ -19,10 +19,10 @@ class Component extends HTMLElement {
     const json = await res.json();
 
     const promises = [];
-    for (const key of Object.keys(window.packages)) {
+    for (const key of Object.keys(window._.packages)) {
       // Onlu update non-linked packages
-      if (window.packages[key].version) {
-        if (json[key].latest > window.packages[key].version) {
+      if (window._.packages[key].version) {
+        if (json[key].latest > window._.packages[key].version) {
           promises.push(this.updatePackage({name: key}));
         }
       }
