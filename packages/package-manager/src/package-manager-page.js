@@ -26,10 +26,10 @@ class Component extends ref(HTMLElement) {
     }
 
     // Populate the table
-    const keys = Object.keys(window.packages);
+    const keys = Object.keys(window._.packages);
     keys.sort();
     for (const key of keys) {
-      const pkg = window.packages[key];
+      const pkg = window._.packages[key];
       const row = this.$.tbody.insertRow();
       let version = pkg.version;
       if (!version) {
@@ -49,7 +49,7 @@ class Component extends ref(HTMLElement) {
       return;
     }
 
-    if (window.packages[pkg] !== undefined) {
+    if (window._.packages[pkg] !== undefined) {
       this.$.message.innerText = `Package already installed`;
       return;
     }

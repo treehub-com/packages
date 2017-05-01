@@ -1,4 +1,4 @@
-const Spaces = require('treehub-spaces');
+const Spaces = require('@treehub/spaces');
 
 module.exports = async ({LevelUpBackend, pathPrefix}) => {
   const api = new Spaces({
@@ -9,5 +9,5 @@ module.exports = async ({LevelUpBackend, pathPrefix}) => {
 
   return ({route, body}) => {
     return api.request({route, body});
-  }
+  };
 };

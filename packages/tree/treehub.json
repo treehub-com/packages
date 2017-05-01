@@ -4,6 +4,10 @@
   "components": [
     "components.js"
   ],
-  "nav": ["tree-nav"],
-  "page": "tree-page"
+  "provides": {
+    "app": {
+      "nav": ["tree-nav"],
+      "page": "tree-page"
+    }
+  }
 }

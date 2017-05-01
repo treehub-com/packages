@@ -11,7 +11,9 @@ class Component extends HTMLElement {
         this._stripHash(window.location.hash));
     };
 
-    Object.defineProperties(window, {
+    window.app = {};
+
+    Object.defineProperties(window.app, {
         'aside': {
           get: () => {
             const hash = window.location.hash;

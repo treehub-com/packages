@@ -4,9 +4,13 @@
   "components": [
     "components.js"
   ],
-  "taskbar": ["test-taskbar"],
-  "nav": ["test-nav"],
-  "page": "test-page",
-  "aside": "test-aside",
-  "route": "route.js"
+  "route": "route.js",
+  "provides": {
+    "app": {
+      "taskbar": ["test-taskbar"],
+      "nav": ["test-nav"],
+      "page": "test-page",
+      "aside": "test-aside"
+    }
+  }
 }

@@ -25,15 +25,17 @@ class Component extends graphql(attr(HTMLElement)) {
     if (path.length === 0) {
       return this._indexPage();
     }
-    const pkg = window.packages[path.shift().toLowerCase()];
+    const pkg = window._.packages[path.shift().toLowerCase()];
     if (pkg === undefined) {
       return this.innerText = 'Package not installed';
     }
 
-    if (pkg.page === undefined) {
+    if (pkg.provides && pkg.provides.app &&
+        pkg.provides.app.page === undefined) {
       return this.innerText = 'Package has no page';
     }
-    this.innerHTML = `<${pkg.page} path="/${path.join('/')}"></${pkg.page}>`;
+    const page = pkg.provides.app.page;
+    this.innerHTML = `<${page} path="/${path.join('/')}"></${page}>`;
   }
 
   async _indexPage() {
@@ -97,9 +99,9 @@ class Component extends graphql(attr(HTMLElement)) {
         type: 'String',
         input: 'personal',
       });
-      window.page = `/tree/_/personal/${id}`;
+      window.app.page = `/tree/_/personal/${id}`;
     } else {
-      window.page = `/tree/_/personal/${tree.root.id}`;
+      window.app.page = `/tree/_/personal/${tree.root.id}`;
     }
   }
 }

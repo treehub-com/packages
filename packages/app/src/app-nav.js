@@ -1,9 +1,14 @@
 class Component extends HTMLElement {
   connectedCallback() {
     this.insertAdjacentHTML('beforeend', `<app-nav-logo></app-nav-logo>`);
-    for (const pkg of Object.keys(window.packages)) {
-      if (Array.isArray(window.packages[pkg].nav)) {
-        for (const elem of window.packages[pkg].nav) {
+    for (const name of Object.keys(window._.packages)) {
+      const pkg = window._.packages[name];
+      if (!pkg.provides || !pkg.provides.app || !pkg.provides.app.nav) {
+        continue;
+      }
+      const nav = pkg.provides.app.nav;
+      if (Array.isArray(nav)) {
+        for (const elem of nav) {
           this.insertAdjacentHTML('beforeend', `<${elem}></${elem}>`);
         }
       }
