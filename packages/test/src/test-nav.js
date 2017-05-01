@@ -2,7 +2,7 @@ class Component extends HTMLElement {
   constructor() {
     super();
     this.addEventListener('click', () => {
-      window.page = '/test/';
+      window.app.page = '/test/';
     });
   }
 

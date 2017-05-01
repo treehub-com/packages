@@ -3,7 +3,7 @@ class Component extends HTMLElement {
     super();
     this.addEventListener('click', () => {
       const space = document.querySelector('app-space');
-      window.page = `/tree/${space.space}`;
+      window.app.page = `/tree/${space.space}`;
     });
   }
 

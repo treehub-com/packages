@@ -99,9 +99,9 @@ class Component extends graphql(attr(HTMLElement)) {
         type: 'String',
         input: 'personal',
       });
-      window.page = `/tree/_/personal/${id}`;
+      window.app.page = `/tree/_/personal/${id}`;
     } else {
-      window.page = `/tree/_/personal/${tree.root.id}`;
+      window.app.page = `/tree/_/personal/${tree.root.id}`;
     }
   }
 }
