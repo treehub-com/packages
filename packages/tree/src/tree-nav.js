@@ -2,8 +2,8 @@ class Component extends HTMLElement {
   constructor() {
     super();
     this.addEventListener('click', () => {
-      const space = document.querySelector('app-space');
-      window.app.page = `/tree/${space.space}`;
+      const space = window.app.space;
+      window.app.page = `/tree/${space.id}`;
     });
   }
 

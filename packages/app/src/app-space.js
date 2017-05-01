@@ -5,7 +5,11 @@ class Component extends attr(HTMLElement) {
     super({
       attributes: Component.observedAttributes,
     });
-    this.space = '_';
+    // TODO switch to a setter/getter to update space when changed
+    window.app.space = {
+      id: '_',
+      name: 'Local',
+    };
   }
 
   static get observedAttributes() {
@@ -16,7 +20,8 @@ class Component extends attr(HTMLElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    this.innerText = 'Space: Personal (_)';
+    const space = window.app.space;
+    this.textContent = `Space: ${space.name} (${space.id})`;
   }
 
   _spaceChanged(newSpace, oldSpace) {

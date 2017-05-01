@@ -23,8 +23,8 @@ class Component extends attr(HTMLElement) {
 
     switch(parts.length) {
       case 0:
-        const space = document.querySelector('app-space');
-        return window.app.page = `/tree/${space.space}`;
+        const space = window.app.space;
+        return window.app.page = `/tree/${space.id}`;
       case 1:
         return this.innerHTML = `<tree-trees space="${parts[0]}"></tree-trees>`;
       case 2:
