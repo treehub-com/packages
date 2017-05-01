@@ -30,10 +30,12 @@ class Component extends graphql(attr(HTMLElement)) {
       return this.innerText = 'Package not installed';
     }
 
-    if (pkg.page === undefined) {
+    if (pkg.provides && pkg.provides.app &&
+        pkg.provides.app.page === undefined) {
       return this.innerText = 'Package has no page';
     }
-    this.innerHTML = `<${pkg.page} path="/${path.join('/')}"></${pkg.page}>`;
+    const page = pkg.provides.app.page;
+    this.innerHTML = `<${page} path="/${path.join('/')}"></${page}>`;
   }
 
   async _indexPage() {

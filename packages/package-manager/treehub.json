@@ -4,8 +4,12 @@
   "components": [
     "components.js"
   ],
-  "taskbar": [
-    "package-manager-taskbar"
-  ],
-  "page": "package-manager-page"
+  "provides": {
+    "app": {
+      "taskbar": [
+        "package-manager-taskbar"
+      ],
+      "page": "package-manager-page"
+    }
+  }
 }

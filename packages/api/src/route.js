@@ -9,5 +9,5 @@ module.exports = async ({LevelUpBackend, pathPrefix}) => {
 
   return ({route, body}) => {
     return api.request({route, body});
-  }
+  };
 };
