@@ -8,6 +8,7 @@
     "publish": "treehub publish ."
   },
   "dependencies": {
+    "@treehub/level": "0.3.0",
     "@treehub/space": "0.1.3",
     "graphql": "0.9.6",
     "graphql-tools": "0.11.0"

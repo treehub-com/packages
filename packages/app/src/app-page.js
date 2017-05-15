@@ -43,15 +43,15 @@ class Component extends graphql(attr(HTMLElement)) {
     const space = await this._query({
       url: '/api/',
       query: 'space(id: $input) { id }',
-      type: 'String',
+      type: 'String!',
       input: '_',
     });
 
     if (space === null) {
       await this._mutation({
         url: '/api/',
-        query: 'createSpace(input: $input) {id}',
-        type: 'SpaceCreateInput',
+        query: 'createSpace(input: $input) {errors {key message} space {id} }',
+        type: 'CreateSpaceInput!',
         input: {id: '_'},
       });
     }
@@ -67,8 +67,8 @@ class Component extends graphql(attr(HTMLElement)) {
     if (tree === null) {
       await this._mutation({
         url: '/api/_',
-        query: 'createTree(input: $input) { id }',
-        type: 'TreeCreateInput',
+        query: 'createTree(input: $input) { errors {key message} tree {id} }',
+        type: 'CreateTreeInput!',
         input: {id: 'personal', name: 'personal'},
       });
       const {id} = await this._mutation({
@@ -89,8 +89,8 @@ class Component extends graphql(attr(HTMLElement)) {
       });
       await this._mutation({
         url: '/api/_',
-        query: 'updateTree(input: $input) { id }',
-        type: 'TreeUpdateInput',
+        query: 'updateTree(input: $input) { errors {key message} tree {id} }',
+        type: 'UpdateTreeInput!',
         input: {id: 'personal', name: 'personal', root: {id, type: 'Person'}},
       });
       tree = await this._query({

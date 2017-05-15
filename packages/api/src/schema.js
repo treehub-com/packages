@@ -1,13 +1,15 @@
 import * as graphqlTools from 'graphql-tools';
+import space from './query/space.js';
 import spaces from './query/spaces.js';
-import create from './mutation/create.js';
+import createSpace from './mutation/createSpace.js';
 
 const resolvers = {
   Query: {
+    space,
     spaces,
   },
   Mutation: {
-    create,
+    createSpace,
   },
 };
 
@@ -19,11 +21,30 @@ const typeDefs = [
   }`,
   // Root Queries
   `type Query {
-    spaces: [String!]!
+    space(id: String!): Space
+    spaces: [Space!]!
   }`,
   // Mutations
   `type Mutation {
-    create(id: String!): Boolean!
+    createSpace(input: CreateSpaceInput!): CreateSpaceOutput!
+  }`,
+  // Types
+  `type Error {
+    # The input field of the error, if any
+    key: String
+    # The error message, suitable for display
+    message: String!
+  }`,
+  `type Space {
+    id: String!
+  }`,
+  // Inputs
+  `input CreateSpaceInput {
+    id: String!
+  }`,
+  `type CreateSpaceOutput {
+    errors: [Error!]!
+    space: Space
   }`,
 ];
 
