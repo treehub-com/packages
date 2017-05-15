@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "rollup -c .rollup.config.js && sed -i '' -e '/var crypto/r crypto-shim.js' -e '/var crypto/d' route.js",
+    "build": "rollup -c .rollup.config.js && sed -i '' -e '/var crypto/r shim.js' -e '/var crypto/d' route.js",
     "publish": "npm run build && treehub publish ."
   },
   "dependencies": {
