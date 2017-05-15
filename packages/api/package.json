@@ -4,14 +4,14 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "rollup -c .rollup.config.js && sed -i '' -e '/var crypto/r shim.js' -e '/var crypto/d' route.js",
-    "publish": "npm run build && treehub publish ."
+    "build": "rollup -c .rollup.config.js",
+    "publish": "npm run build && treehub publish .",
+    "watch": "npm run build -- -w"
   },
   "dependencies": {
     "@treehub/level": "0.3.0",
-    "@treehub/space": "0.2.0",
-    "graphql": "0.9.6",
-    "graphql-tools": "0.11.0"
+    "@treehub/space": "0.2.1",
+    "graphql": "0.9.6"
   },
   "devDependencies": {
     "@treehub/cli": "0.3.0",
