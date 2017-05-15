@@ -1,5 +1,6 @@
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
+import globals from 'rollup-plugin-node-globals';
 
 export default {
   entry: 'src/route.js',
@@ -10,5 +11,6 @@ export default {
     commonjs({
       include: 'node_modules/**',
     }),
+    globals(),
   ]
 };
