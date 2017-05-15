@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "build": "rollup -c .rollup.config.js && sed -i '' -e '/var crypto/r crypto-shim.js' -e '/var crypto/d' route.js",
-    "publish": "treehub publish ."
+    "publish": "npm run build && treehub publish ."
   },
   "dependencies": {
     "@treehub/level": "0.3.0",
@@ -14,9 +14,9 @@
     "graphql-tools": "0.11.0"
   },
   "devDependencies": {
+    "@treehub/cli": "0.3.0",
     "rollup": "0.41.6",
     "rollup-plugin-commonjs": "8.0.2",
-    "rollup-plugin-node-resolve": "3.0.0",
-    "treehub-cli": "0.1.0"
+    "rollup-plugin-node-resolve": "3.0.0"
   }
 }
