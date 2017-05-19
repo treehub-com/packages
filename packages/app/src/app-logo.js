@@ -1,4 +1,4 @@
-import html from './app-nav-logo.html';
+import html from './app-logo.html';
 
 class Component extends HTMLElement {
   connectedCallback() {

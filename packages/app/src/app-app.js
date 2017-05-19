@@ -82,10 +82,12 @@ class Component extends HTMLElement {
   connectedCallback() {
     this.innerHTML = html;
 
+    this.$.nav = this.querySelector('app-nav');
     this.$.page = this.querySelector('app-page');
     this.$.aside = this.querySelector('app-aside');
 
     // We don't call _navigate to avoid the new/old comparison
+    this.$.nav.setAttribute('page', window.location.pathname);
     this.$.page.setAttribute('page', window.location.pathname);
     this.$.aside.setAttribute('page', window.location.pathname);
     this.$.aside.setAttribute('aside', this._stripHash(window.location.hash));
@@ -98,6 +100,7 @@ class Component extends HTMLElement {
     if (currentPage === page && currentAside === aside) return;
 
     history.pushState({}, '', page + ((aside) ? `#${aside}` : ''));
+    this.$.nav.setAttribute('page', page);
     this.$.page.setAttribute('page', page);
     this.$.aside.setAttribute('page', page);
     this.$.aside.setAttribute('aside', aside);
