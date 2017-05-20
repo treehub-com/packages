@@ -48,7 +48,6 @@ app-main {
   flex-direction: row;
 }
 app-nav {
-  height: 100%;
   width: 16rem;
   overflow-x: hidden;
   overflow-y: auto;
