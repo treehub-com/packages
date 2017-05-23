@@ -1,0 +1,16 @@
+{
+  "name": "sync",
+  "description": "Synchronize spaces",
+  "components": [
+    "components.js"
+  ],
+  "route": "route.js",
+  "provides": {
+    "app": {
+      "taskbar": [
+        "sync-taskbar"
+      ],
+      "page": "sync-page"
+    }
+  }
+}
