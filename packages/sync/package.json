@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@thp/lib": "*",
-    "@thp/mixins": "*"
+    "@thp/mixins": "*",
+    "@treehub/level": "0.3.0",
+    "graphql": "0.9.6"
   },
   "devDependencies": {
     "@treehub/cli": "0.3.0",

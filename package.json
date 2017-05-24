@@ -16,7 +16,7 @@
   "devDependencies": {
     "eslint": "3.19.0",
     "eslint-config-google": "0.7.1",
-    "lerna": "2.0.0-rc.2",
+    "lerna": "^2.0.0-rc.5",
     "rollup": "0.41.6",
     "rollup-plugin-commonjs": "8.0.2",
     "rollup-plugin-node-globals": "1.1.0",
