@@ -1,5 +1,5 @@
 export default async (_, {input}, {db}) => {
-  const {id} = input;
+  const {id, name} = input;
   const response = {
     errors: [],
     space: null,
@@ -23,7 +23,7 @@ export default async (_, {input}, {db}) => {
     return response;
   }
 
-  response.space = {id};
+  response.space = {id, name};
   await db.put(`space:${id}`, response.space);
 
   return response;
