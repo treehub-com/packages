@@ -1,46 +1,30 @@
-import html from './sync-page.html';
-import $ from '@thp/mixins/$';
-import {query} from '@thp/lib/graphql.js';
+import attr from '@thp/mixins/attr';
 
-class Component extends $(HTMLElement) {
+class Component extends attr(HTMLElement) {
   constructor() {
     super({
-      $: {
-        tbody: '#sync-list tbody',
-      },
+      attributes: Component.observedAttributes,
     });
+  }
+
+  static get observedAttributes() {
+    return [
+      'path',
+    ];
   }
 
   connectedCallback() {
-    this.innerHTML = html;
     super.connectedCallback();
-    this._populateTable();
+    this._pathChanged(this.path, null);
   }
 
-  async _populateTable() {
-    const spaces = await query({
-      url: '/api/',
-      query: 'spaces {id name}',
-    });
+  _pathChanged(newPath, oldPath) {
+    const parts = newPath.split('/').filter((x) => x !== '');
 
-    const syncSpaces = await query({
-      url: '/sync/',
-      query: 'spaces {id url authorization}',
-    });
-    const sync = {};
-    for (const space of syncSpaces) {
-      sync[space.id] = space;
-    }
-
-    for (const space of spaces) {
-      const syncSpace = sync[space.id] ? sync[space.id] : {};
-      const row = this.$.tbody.insertRow();
-      const link = document.createElement('a');
-      link.href = `/sync/${space.id}`;
-      link.textContent = space.name;
-      row.insertCell().appendChild(link);
-      row.insertCell().textContent = syncSpace.url;
-      row.insertCell().textContent = syncSpace.authorization;
+    if (parts.length === 0) {
+      this.innerHTML = '<sync-spaces></sync-spaces>';
+    } else {
+      this.innerHTML = `<sync-space space="${parts[0]}"></sync-space>`;
     }
   }
 }
