@@ -58,7 +58,7 @@ class Component extends HTMLElement {
       });
 
       localCID = await mutation({
-        url,
+        url: `/api/${id}`,
         query: `apply(cid: ${cid} changes: $input)`,
         type: 'JSON!',
         input: changes,
