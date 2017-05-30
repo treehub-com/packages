@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@treehub/level": "0.3.0",
-    "@treehub/space": "0.4.1",
+    "@treehub/space": "0.4.4",
     "graphql": "0.9.6"
   },
   "devDependencies": {

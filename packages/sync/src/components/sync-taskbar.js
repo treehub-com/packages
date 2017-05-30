@@ -20,7 +20,8 @@ class Component extends HTMLElement {
     });
 
     for (const space of spaces) {
-      this._syncSpace(space.id, space.url);
+      this._syncSpace(space.id, space.url)
+        .catch((error) => console.error(error));
     }
   }
 
@@ -122,7 +123,7 @@ class Component extends HTMLElement {
     const trees = {};
     for (const tree of localTrees.trees) {
       trees[tree.id] = {
-        url: `url/${tree.id}`,
+        url: `${url}/${tree.id}`,
         space: id,
         tree: tree.id,
         local: tree.lastCommit,
@@ -145,8 +146,8 @@ class Component extends HTMLElement {
     console.log('tree sync complete');
   }
 
-  async _syncTree({url, space, tree, local, remote, sync = null}) {
-    console.log(`syncing ${space}/${id}`);
+  async _syncTree({url, space, tree, local, remote, sync}) {
+    console.log(`syncing ${space}/${tree}`);
 
     const undoneCommits = [];
 
@@ -155,7 +156,7 @@ class Component extends HTMLElement {
       console.log('tree: syncing down');
       const remoteCommits = await query({
         url,
-        query: 'commits(commit: $input limit: 10)',
+        query: 'commits(after: $input limit: 10)',
         type: 'String',
         input: sync,
       });
@@ -191,7 +192,7 @@ class Component extends HTMLElement {
       console.log('tree: syncing up');
       const localCommits = await query({
         url: `/api/${space}/${tree}`,
-        query: 'commits(commit: $input limit: 10)',
+        query: 'commits(after: $input limit: 10)',
         type: 'String',
         input: sync,
       });
@@ -204,13 +205,26 @@ class Component extends HTMLElement {
       for (const commit of localCommits) {
         await mutation({
           url,
-          query: 'patch(input: $input) { id }',
+          query: 'patch(input: $input)',
           type: 'PatchInput!',
-          input: commit,
+          input: {commit},
         });
         sync = commit.id;
       }
     }
+
+    // Update Tree Sync
+    await mutation({
+      url: '/sync/',
+      query: `setTreeStatus(input: $input)`,
+      type: 'SetTreeStatusInput!',
+      input: {
+        space,
+        id: tree,
+        lastSync: (Date.now() / 1000 | 0),
+        commit: sync,
+      },
+    });
   }
 }
 
