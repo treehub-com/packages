@@ -6,8 +6,6 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "new-component": "./scripts/new-component",
-    "new-package": "./scripts/new-package",
     "publish": "lerna exec --stream --concurrency 1 -- 'if [[ $(git diff --name-only HEAD~1 .) ]]; then npm run publish; fi'",
     "watch": "lerna run watch --stream --concurrency 128"
   },
