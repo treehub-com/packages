@@ -39,10 +39,12 @@ const typeDefs = [
   }`,
   `type Space {
     id: String!
+    name: String!
   }`,
   // Inputs
   `input CreateSpaceInput {
     id: String!
+    name: String!
   }`,
   `type CreateSpaceOutput {
     errors: [Error!]!

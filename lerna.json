@@ -1,7 +1,13 @@
 {
-  "lerna": "2.0.0-beta.37",
+  "lerna": "2.0.0-rc.5",
   "version": "independent",
-  "hoist": "*",
+  "commands": {
+    "bootstrap": {
+      "nohoist": [
+        "graphql"
+      ]
+    }
+  },
   "packages": [
     "packages/*"
   ]

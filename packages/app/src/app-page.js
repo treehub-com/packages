@@ -52,7 +52,7 @@ class Component extends graphql(attr(HTMLElement)) {
         url: '/api/',
         query: 'createSpace(input: $input) {errors {key message} space {id} }',
         type: 'CreateSpaceInput!',
-        input: {id: '_'},
+        input: {id: '_', name: 'Local'},
       });
     }
 

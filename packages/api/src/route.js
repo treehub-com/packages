@@ -21,7 +21,7 @@ async function getSpace(id) {
 
   spaces[id] = new Space({
     name: id,
-    prefix,
+    prefix: `${prefix}${id}.`,
     backend,
     mode: Space.CLIENT,
   });
